@@ -1,0 +1,26 @@
+--- a/target/linux/mvebu/image/Makefile
++++ b/target/linux/mvebu/image/Makefile
+@@ -247,12 +247,23 @@ define Image/Build/squashfs
+ 	$(call Image/Build/Profile/$(PROFILE)/squashfs)
+ endef
+ 
++define Image/Build/UpgradeImg
++	mv $(BIN_DIR)/$(IMG_PREFIX)-armada-385-linksys-shelby-$(1)-sysupgrade.tar $(BIN_DIR)/sabai-bundle.tar
++	mv $(BIN_DIR)/$(IMG_PREFIX)-armada-385-linksys-shelby-squashfs-factory.img $(BIN_DIR)/sabai-factory.img
++
++	openssl dgst -sha256 < $(BIN_DIR)/sabai-bundle.tar > $(BIN_DIR)/hash
++	openssl rsautl -sign -inkey $(SABAI_KEYS)/private.pem -keyform PEM -in $(BIN_DIR)/hash  > $(BIN_DIR)/signature
++	tar -C $(BIN_DIR) -cf $(BIN_DIR)/sabai-bundle-secured.tar sabai-bundle.tar signature
++	rm $(BIN_DIR)/hash $(BIN_DIR)/signature
++endef
++
+ define Image/Build
+ 	$(call Image/Build/$(1))
+ 	$(call Image/Build/Profile/$(PROFILE)/BuildSysupgrade,$(1))
+ ifneq ($(CONFIG_TARGET_ROOTFS_INITRAMFS),)
+ 	$(call Image/Build/Profile/$(PROFILE)/Initramfs)
+ endif
++	$(call Image/Build/UpgradeImg,$(1))
+ endef
+ 
+ $(eval $(call BuildImage))
