@@ -1,0 +1,16 @@
+traceroute to google.com (74.125.21.101), 20 hops max, 46 byte packets
+ 1  192.168.222.1 (192.168.222.1)  0.309 ms  0.266 ms  0.329 ms
+ 2  24-240-173-193.static.hckr.nc.charter.com (24.240.173.193)  2.127 ms  1.776 ms  1.570 ms
+ 3  *  *  *
+ 4  dtr01ssvlsc-tge-0-2-0-5.ssvl.sc.charter.com (96.34.67.217)  12.522 ms  8.946 ms  9.584 ms
+ 5  dtr02spbgsc-tge-0-4-0-5.spbg.sc.charter.com (96.34.64.218)  11.043 ms  dtr02spbgsc-tge-0-4-0-1.spbg.sc.charter.com (96.34.66.117)  12.454 ms  dtr02spbgsc-tge-0-1-0-5.spbg.sc.charter.com (96.34.64.216)  12.646 ms
+ 6  crr12spbgsc-bue-20.spbg.sc.charter.com (96.34.93.111)  9.525 ms  12.521 ms  10.050 ms
+ 7  bbr01spbgsc-bue-4.spbg.sc.charter.com (96.34.2.50)  18.994 ms  15.979 ms  15.925 ms
+ 8  bbr02atlnga-bue-4.atln.ga.charter.com (96.34.0.40)  25.503 ms  23.923 ms  23.926 ms
+ 9  prr01atlnga-bue-3.atln.ga.charter.com (96.34.3.19)  18.412 ms  17.147 ms  18.943 ms
+10  72.14.220.17 (72.14.220.17)  17.848 ms  17.786 ms  16.026 ms
+11  72.14.239.100 (72.14.239.100)  25.558 ms  21.861 ms  21.289 ms
+12  66.249.94.20 (66.249.94.20)  16.284 ms  66.249.94.22 (66.249.94.22)  17.683 ms  66.249.94.20 (66.249.94.20)  17.394 ms
+13  209.85.248.53 (209.85.248.53)  15.840 ms  64.233.175.12 (64.233.175.12)  36.319 ms  64.233.175.15 (64.233.175.15)  17.987 ms
+14  *  *  *
+15  yv-in-f101.1e100.net (74.125.21.101)  17.491 ms  18.719 ms  19.370 ms
