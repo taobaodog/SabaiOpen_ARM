@@ -1,0 +1,50 @@
+
+config dnsmasq
+	option domainneeded '1'
+	option boguspriv '1'
+	option filterwin2k '0'
+	option localise_queries '1'
+	option rebind_protection '1'
+	option rebind_localhost '1'
+	option local '/lan/'
+	option domain 'lan'
+	option expandhosts '1'
+	option nonegcache '0'
+	option authoritative '1'
+	option readethers '1'
+	option leasefile '/tmp/dhcp.leases'
+	option resolvfile '/tmp/resolv.conf.auto'
+	option localservice '1'
+
+config dhcp 'lan'
+	option interface 'lan'
+	option start '100'
+	option limit '254'
+	option leasetime '12h'
+	option dhcpv6 'server'
+	option ra 'server'
+
+config dhcp 'wan'
+	option interface 'wan'
+	option ignore '1'
+
+config odhcpd 'odhcpd'
+	option maindhcp '0'
+	option leasefile '/tmp/hosts/odhcpd'
+	option leasetrigger '/usr/sbin/odhcpd-update'
+
+config 'dhcp' 'guest'
+	option 'interface' 'guest'
+	option 'start' '50'
+	option 'limit' '200'
+	option 'leasetime' '2h'
+
+config host
+	option ip '192.168.199.124'
+	option mac '08:10:76:2a:5c:6e'
+	option name 'wmofficedesktop'
+
+config host
+	option ip '192.168.199.199'
+	option mac '8c:3a:e3:73:73:80'
+	option name 'wmphone'

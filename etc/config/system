@@ -1,0 +1,36 @@
+
+config system
+	option timezone 'EST5EDT,M3.2.0,M11.1.0'
+	option hostname 'SabaiOpen'
+	option log_file '/var/log/messages'
+	option log_size '1024'
+
+config timeserver 'ntp'
+	list server '0.openwrt.pool.ntp.org'
+	list server '1.openwrt.pool.ntp.org'
+	list server '2.openwrt.pool.ntp.org'
+	list server '3.openwrt.pool.ntp.org'
+	option enabled '1'
+	option enable_server '0'
+
+config led 'led_wan'
+	option name 'WAN'
+	option sysfs 'pca963x:shelby:white:wan'
+	option trigger 'netdev'
+	option dev 'eth0'
+	option mode 'link tx rx'
+
+config led 'led_usb2'
+	option name 'USB2'
+	option sysfs 'pca963x:shelby:white:usb2'
+	option trigger 'usbdev'
+	option dev '1-1'
+	option interval '50'
+
+config led 'led_usb3'
+	option name 'USB3'
+	option sysfs 'pca963x:shelby:white:usb3_1'
+	option trigger 'usbdev'
+	option dev '2-1'
+	option interval '50'
+

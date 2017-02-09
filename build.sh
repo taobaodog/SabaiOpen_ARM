@@ -17,7 +17,7 @@ _make() {
 	fi
 
 	cp -r "$SABAI_DIR"/www "$FILES_DIR"
-#	cp -r "$SABAI_DIR"/etc "$FILES_DIR"
+	cp -r "$SABAI_DIR"/etc "$FILES_DIR"
 
 
 	echo "SOA 2: \033[1;32m Build is starting. \033[0m"
