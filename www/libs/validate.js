@@ -1,1 +1,0 @@
-/www/libs/current/jquery.validate.js
