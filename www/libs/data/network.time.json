@@ -1,0 +1,16 @@
+{
+  "aaData": [
+    {
+     	"DT_RowId": "0", 
+	"ntp_server":"1.openwrt.pool.ntp.org"
+    },
+    {
+      	"DT_RowId": "1", 
+	"ntp_server":"2.openwrt.pool.ntp.org"
+    },
+    {
+      	"DT_RowId": "2", 
+	"ntp_server":"3.openwrt.pool.ntp.org"
+    }
+  ]
+}
