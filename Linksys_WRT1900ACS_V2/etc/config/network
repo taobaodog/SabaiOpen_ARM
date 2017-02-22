@@ -35,11 +35,6 @@ config interface 'wan6'
 	option ifname 'eth0'
 	option proto 'dhcpv6'
 
-config route
-
-config interface 'wwan'
-	option proto 'dhcp'
-
 config interface 'sabai'
 	option ifname 'tun0'
 	option proto 'none'
