@@ -40,7 +40,7 @@ config wifi-iface
 
 config wifi-iface
 	option device 'radio0'
-	option network 'wan'
+	option network 'lan'
 	option ifname 'wlan2'
 	option mode 'ap'
 	option ssid 'SabaiOpen_5.8GHz'
@@ -48,3 +48,13 @@ config wifi-iface
 	option key 'sabaipass123'
 	option macaddr '62:38:e0:d7:6d:48'
 
+config wifi-iface
+	option device 'radio0'
+	option network 'wan'
+	option ifname 'wlan3'
+	option mode 'ap'
+	option ssid 'SabaiWAN_5.8GHz'
+	option encryption 'psk2+aes'
+	option key 'sabaipass123'
+	option macaddr '62:38:e0:d7:6d:48'
+	

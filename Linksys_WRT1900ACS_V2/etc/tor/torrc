@@ -1,0 +1,25 @@
+# SABAI TOR CONFIG
+SocksPort 0.0.0.0:9050
+SocksPolicy accept *
+
+
+RunAsDaemon 1
+DataDirectory /var/lib/tor
+
+
+CircuitBuildTimeout 30
+KeepAlivePeriod 60
+NewCircuitPeriod 15
+NumEntryGuards 8
+ConstrainedSockets 1
+ConstrainedSockSize 8192
+AvoidDiskWrites 1
+
+
+User tor
+
+
+VirtualAddrNetwork 10.192.0.0/10
+AutomapHostsOnResolve 1
+TransPort 0.0.0.0:9040
+DNSPort 0.0.0.0:9053
