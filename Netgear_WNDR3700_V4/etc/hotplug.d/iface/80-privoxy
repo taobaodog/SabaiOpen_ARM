@@ -1,0 +1,29 @@
+#!/bin/sh
+
+# only (re-)start on ifup
+[ "$ACTION" = "ifup" ] || exit 0
+
+PIDFILE=/var/run/privoxy.pid
+
+_PID=$(cat $PIDFILE 2>/dev/null)
+kill -1 $_PID 2>/dev/null
+if [ $? -eq 0 ]; then
+	# only restart if already running
+	logger -p daemon.info -t "privoxy[$_PID]" \
+	"Restart request due to '$ACTION' of interface '$INTERFACE'"
+	/etc/init.d/privoxy restart
+else
+	# only start if enabled
+	/etc/init.d/privoxy enabled && /etc/init.d/privoxy start
+fi
+
+# check status
+sleep 3
+status="$(netstat -lnp | grep privoxy | awk -F: '{print $2}' | awk '{print $1}')"
+if [ $status ]; then
+	uci -c /configs set sabai.proxy.status="On"
+	uci -c /configs commit sabai
+else
+	uci -c /configs set sabai.proxy.status="Off"
+	uci -c /configs commit sabai
+fi

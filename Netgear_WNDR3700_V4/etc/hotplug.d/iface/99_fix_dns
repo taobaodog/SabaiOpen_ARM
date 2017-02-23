@@ -1,0 +1,2 @@
+[ "$ACTION" = "ifdown" -a "$INTERFACE" = "vpn" ] && /www/bin/flush_dns_fix.sh
+[ "$ACTION" = "ifup" -a "$INTERFACE" = "vpn" -a "$(uci get system.@system[0].hostname)" != "vpna" ] && /www/bin/gw.sh vpn_gw
