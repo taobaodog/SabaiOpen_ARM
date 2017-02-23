@@ -1,0 +1,4 @@
+
+config u2pnpd
+	option uuid 'd28a3cf8-01a1-4f9b-b395-e74fd92570d3'
+
