@@ -10,7 +10,7 @@ $dev=exec("uci get system.@system[0].hostname");
 $sys = " \"sys\": {
   \"name\": \"". exec("uci get system.@system[0].hostname") ."\" ,
   \"model\": \"". exec("awk '/model name/' /proc/cpuinfo | awk -F: '{print $2}'") ."\",
-  \"version\": \"". exec("cat /etc/sabaiopen_version") ."\",
+  \"version\": \"". exec("cat /etc/sabai/sabaiopen_version") ."\",
   \"time\": \"". exec("date") ."\",
   \"uptime\": \"". exec("uptime | awk '{print $3,$4}' | sed 's/\,//g'") ."\",
   \"cpuload\": \"". exec("uptime | awk -F: '{print $5,$6,$7}'") ."\",

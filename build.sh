@@ -5,6 +5,7 @@ OPENWRT_DIR="../openwrt"
 SABAI_DIR="../SabaiOpen_ARM"
 FILES_DIR="files"
 PLATFORM_DIR=""
+BUILD_VER="$(date +"%m-%d-%y_%H-%M")"
 
 _help(){
 	echo "\n\033[1;32m Usage: sh build.sh <argument> \n"
@@ -28,7 +29,7 @@ _make() {
 
 	cp -r "$SABAI_DIR"/www "$FILES_DIR"
 	cp -r "$SABAI_DIR/$PLATFORM_DIR"/etc "$FILES_DIR"
-
+	echo "$BUILD_VER" > "$FILES_DIR"/etc/sabai/sabaiopen_version
 
 	echo "SOA 2: \033[1;32m Build is starting. \033[0m"
 	make V=99
@@ -42,14 +43,12 @@ _prepare(){
 	
 		cd "$OPENWRT_DIR"
 		git apply "$PATCHES_DIR/0001-SabaiOpen-build-support-linksys.patch"
-	
 		echo "SOA 1: \033[0;32m Patches has been applied.\033[0m"
-		_make
 	else
 		echo "SOA 1: \033[0;31m Patches has been already applied.\033[0m"
 		cd "$OPENWRT_DIR"
-		_make
 	fi
+	_make
 	echo "SOA 3: \033[1;32m $PLATFORM_DIR Build is ready. \033[0m"
 }
 

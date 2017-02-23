@@ -23,7 +23,7 @@
 	$version=$obj->version;
 	$link=$obj->link;
 
-	$version_list=file_get_contents("/etc/sabaiopen_version_old");
+	$version_list=file_get_contents("/etc/sabai/sabaiopen_version_old");
 	if( strpos($version_list, $version) == false ) {
 		exec("uci $UCI_PATH set sabai.general.new_version=\"" . $version . "\"");
 		exec("uci $UCI_PATH set sabai.general.download_uri=\"" . $link . "\"");
