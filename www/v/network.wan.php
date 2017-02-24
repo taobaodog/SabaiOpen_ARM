@@ -23,7 +23,6 @@ if (basename($_SERVER['PHP_SELF']) == basename(__FILE__)) {
       <select class='col-md-4 col-lg-4 col-sm-4' id='wan_proto' name='wan_proto' class='radioSwitchElement'>
         <option value='dhcp'>DHCP</option>
         <option value='static'>Static</option>
-        <option value='lan'>LAN</option>
       </select>
     </div>
 
@@ -88,37 +87,6 @@ if (basename($_SERVER['PHP_SELF']) == basename(__FILE__)) {
       <span class ='xsmallText'>(These are the DNS servers the DHCP server will provide for devices also on the LAN)
       </span><br><br>
     </div>
-
-
-
-<!--     <table class='controlTable'>
-      <tbody>
-      <tr>
-        <td>DNS Servers</td>
-        <td>
-          <div>
-            <ul id='dns_servers'>
-              <li><input type='text' placeholder='DNS 1' name='dns_server1'><a class='dns-delete deleteDNS'>✖</a><label id='dns_server1Label' class='errorLabel'></label></li>
-              <li><input type='text' placeholder='DNS 2' name='dns_server2'><a class='dns-delete deleteDNS'>✖</a><label id='dns_server2Label' class='errorLabel'></label></li>
-              <li><input type='text' placeholder='DNS 3' name='dns_server3'><a class='dns-delete deleteDNS'>✖</a><label id='dns_server3Label' class='errorLabel'></label></li>
-              <li><input type='text' placeholder='DNS 4' name='dns_server4'><a class='dns-delete deleteDNS'>✖</a><label id='dns_server4Label' class='errorLabel'></label></li>
-            </ul>
-            <input type='hidden' name='dns_servers[]'>
-            <input type='hidden' name='dns_servers[]'>
-            <input type='hidden' name='dns_servers[]'>
-            <input type='hidden' name='dns_servers[]'>
-          </div>
-        </td>
-          <div id="editableListDescription">
-            <span id='dns_stat' color="red"></span><br><br>
-            <span class ='xsmallText'>(These are the DNS servers the DHCP server will provide for devices also on the LAN)
-            </span><br><br>
-          </div>
-        </td>
-      </tr>
-      </tbody>
-    </table> -->
-
   </div>
 </div>
 
@@ -362,121 +330,6 @@ $.widget("jai.wansetup", {
     
   //Adding to the built-in widget constructor method - do this when widget is instantiated
   _create: function(){
-    //TO DO: check to see if containing element has a unique id
-    
-/*    // BUILDING DOM ELEMENTS
-    $(this.element)
-    .append( $(document.createElement('table')).addClass("controlTable")
-      .append( $(document.createElement('tbody')) 
-        
-        .append( $(document.createElement('tr'))
-          .append( $(document.createElement('td')).html('WAN proto') 
-          )
-          .append( $(document.createElement('td') ) 
-            .append(
-              $(document.createElement('select'))
-                .prop("id","wan_proto")
-                .prop("name","wan_proto")
-                .prop("class", "radioSwitchElement")
-              .append( $(document.createElement('option'))
-                .prop("value", "dhcp")
-                .prop("text", 'DHCP')
-              )
-              .append( $(document.createElement('option'))
-                .prop("value", "static")
-                .prop("text", 'Static')
-              )
-              .append( $(document.createElement('option'))
-                .prop("value", "lan")
-                .prop("text", 'LAN')
-              )
-            )
-
-          )
-        ) // end proto tr
-      ) // end first tbody
-      .append( $(document.createElement('tbody')).addClass("wan_proto wan_proto-static") 
-        .append( $(document.createElement('tr') )
-          .append( $(document.createElement('td')).html('IP') )
-          .append( $(document.createElement('td') )
-            .append(
-              $(document.createElement('input'))
-                .prop("id","wan_ip")
-                .prop("name","wan_ip")
-                .prop("type","text")
-            )
-            .append(
-              $(document.createElement('label')).addClass('errorLabel')
-              .prop("id", "wan_ipLabel")
-            )
-          )
-        ) // end ip row
-        .append( $(document.createElement('tr') )
-          .append( $(document.createElement('td')).html('Network Mask') )
-          .append( $(document.createElement('td') )
-            .append(
-              $(document.createElement('input'))
-                .prop("id","wan_mask")
-                .prop("name","wan_mask")
-                .prop("type","text")
-            )
-            .append(
-              $(document.createElement('label')).addClass('errorLabel')
-              .prop("id", "wan_maskLabel")
-            )
-          )
-        ) // end nmask row
-        .append( $(document.createElement('tr') )
-          .append( $(document.createElement('td')).html('Gateway') )
-          .append( $(document.createElement('td') )
-            .append(
-              $(document.createElement('input'))
-                .prop("id","wan_gateway")
-                .prop("name","wan_gateway")
-                .prop("type","text")
-            )
-            .append(
-              $(document.createElement('label')).addClass('errorLabel')
-              .prop("id", "wan_gatewayLabel")
-            )
-          )
-        ) // end gateway row
-      ) // end 2nd table body
-      .append( $(document.createElement('tbody')) 
-        .append( $(document.createElement('tr') )
-          .append( $(document.createElement('td')).html('MTU') )
-          .append( $(document.createElement('td') )
-            .append(
-              $(document.createElement('input'))
-                .prop("id","wan_mtu")
-                .prop("name","wan_mtu")
-                .prop("type","text")
-            )
-            .append(
-              $(document.createElement('label')).addClass('errorLabel')
-              .prop("id", "wan_mtuLabel")
-            )
-          )
-        ) //end MTU row
-        .append( $(document.createElement('tr') )
-          .append( $(document.createElement('td')).html('MAC') )
-          .append( $(document.createElement('td') )
-            .append(
-              $(document.createElement('input'))
-                .prop("id","wan_mac")
-                .prop("name","wan_mac")
-                .prop("type","text")
-            )
-            .append(
-              $(document.createElement('label')).addClass('errorLabel')
-              .prop("id", "wan_macLabel")
-            )
-          )
-        ) //end Mac row
-      ) // end bottom table body
-    ) // end table*/
-
-    // call maskspinner widget
     $('#wan_mask').maskspinner({
       spin: function(event,ui){ 
         $('#wan_ip').ipspinner('option','page', Math.pow(2,(32-ui.value)) ) 
@@ -498,11 +351,7 @@ $.widget("jai.wansetup", {
 $(function(){
   //instatiate widgets on document ready
   $('#wansetup').wansetup({ conf: wan });
-  
-  //alert(('input[name=dns_server1]').val());
-  //alert();
   for (i=0; i<4; i++){
-    //$('#dns_servers').find('li').eq(i).find('input').val(dns.servers[i]);
     $('input[name=dns_server'+ (i+1) +']').ipspinner({
     min: '0.0.0.1',
     max: '255.255.255.254',
@@ -510,15 +359,9 @@ $(function(){
       spinnerConstraint(this);
     }
   }).ipspinner('value',dns.servers[i]);
-  
-  
-    
     $('#dns_servers').find('li').eq(i).find('a').click(function(el){
       $(el.target).parent().find('input').val('');
     });
   }
 })
-
-
-
 </script>
