@@ -7,13 +7,6 @@ config wifi-device  radio0
 	# REMOVE THIS LINE TO ENABLE WIFI:
 	option disabled 1
 
-config wifi-iface
-	option device   radio0
-	option network  lan
-	option mode     ap
-	option ssid     OpenWrt
-	option encryption none
-
 config wifi-device  radio1
 	option type     mac80211
 	option channel  36
@@ -22,6 +15,13 @@ config wifi-device  radio1
 	option htmode	HT20
 	# REMOVE THIS LINE TO ENABLE WIFI:
 	option disabled 1
+
+config wifi-iface
+	option device   radio0
+	option network  lan
+	option mode     ap
+	option ssid     OpenWrt
+	option encryption none
 
 config wifi-iface
 	option device   radio1

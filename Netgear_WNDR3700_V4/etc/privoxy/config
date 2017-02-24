@@ -1,0 +1,25 @@
+confdir                      /etc/privoxy
+logdir                       /var/log
+filterfile                   default.filter
+logfile                      privoxy
+actionsfile                  match-all.action  # Actions that are applied to all sites and maybe overruled later on.
+actionsfile                  default.action    # Main actions file
+listen-address               0.0.0.0:8080
+toggle                       0
+enable-remote-toggle         1
+enable-remote-http-toggle    0
+enable-edit-actions          1
+enforce-blocks               0
+buffer-limit                 4096
+forwarded-connect-retries    0
+accept-intercepted-requests  0
+allow-cgi-request-crunching  0
+split-large-forms            0
+keep-alive-timeout           300
+socket-timeout               300
+permit-access                0.0.0.0/0
+debug                        1     # show each GET/POST/CONNECT request
+#debug                       4096  # or Startup banner and warnings
+#debug                       8192  # or Errors - *we highly recommended enabling this*
+#admin-address               privoxy-admin@example.com
+#proxy-info-url              http://www.example.com/proxy-service.html
