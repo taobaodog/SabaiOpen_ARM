@@ -112,7 +112,7 @@ console.log($("#fe").serialize());
 					hideUi("Log file is empty.");
 					setTimeout(function(){showUi()},4500);
 				} else {
-					$('#logContents').html(data);
+					$('#logContent').html(data);
 				}
 			},
 			dataType: "text",
