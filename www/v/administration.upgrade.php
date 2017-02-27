@@ -42,7 +42,7 @@ Upgrade
     	<input id='fileName' name='_fileName' type='text'>
 
     	<button class='btn btn-default btn-sm' id='download' name='submit'>Download</button><br><br>
-    	<button class='btn btn-default btn-sm' id='upgrade' onclick="Upgrade('upgrading');">Run Update</button>
+    	<button class='btn btn-default btn-sm' id='upgrade' onclick="Upgrade('upgrade');">Run Update</button>
     	<button class='btn btn-default btn-sm' id='revert' name='Revert'>Revert Update</button>
     	<button class='btn btn-default btn-sm' id='reset' name='Reset'>Factory Reset</button><br>
         	<div id='hideme'>
@@ -179,7 +179,7 @@ $.widget("jai.update_form", {
 				timeout: 120000,
 				success: function() {
 					hideUi("New firmware was downloaded!");
-					setTimeout(function(){Upgrade('upgrading')},2000);
+					setTimeout(function(){Upgrade('upgrade')},2000);
 				},
 				error: function() {
 					hideUi("Failed");
@@ -372,31 +372,30 @@ function Upgrade(act)	{
 	$(document).ready( function() {
 		hideUi("Please wait. Preparing installation.");
 		E("act").value=act;
-		$.get('php/update.php')
-  			.done(function(data) {
+		$.get('php/update.php', {'act': act})
+		  			.done(function(data) {
 				if (data.trim() == "false") {
 					hideUi("No image file selected.");
 					setTimeout(function(){showUi()},3000);
 				} else {
 					setTimeout(function(){hideUi(data)},3000);
- 					setTimeout(function(){showUi()},5000);
+					setTimeout(function(){showUi()},5000);
 				}
 			})
 			.fail(function() {
-				hideUi_timer("Firmware was transferred. Please wait. Upgrade in progress...", 270);
-				setTimeout(function(){hideUi("Please wait. Checking installation status.")},271000);
-				setTimeout(function(){checkUpdate()}, 280000);
+				hideUi_timer("Firmware was transferred. Please wait. Upgrade in progress...", 60);
+				setTimeout(function(){hideUi("Please wait. Checking installation status.")},61000);
+				setTimeout(function(){checkUpdate()}, 62000);
 			})
 	});
 
 }
 
 function checkUpdate() {
-	$.get('resUpgrade.txt')
+	$.get('php/update.php', {'act': act})
 		.done(function(res) {
 			if (res != '')	{
-				var text = res.slice(7);
-				setTimeout(function(){hideUi(text)},2000);
+				setTimeout(function(){hideUi(res)},2000);
 				setTimeout(function(){showUi()},5000);
 			} else {
 				setTimeout(function(){hideUi("Something went wrong.")},2000);

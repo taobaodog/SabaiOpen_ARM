@@ -5,7 +5,7 @@ $UCI_PATH="";
 // Bring over variables from the WAN page
 $act=trim($_POST['act']);
 
-if ($act == 'updtae') {
+if ($act == 'update') {
 	exec("/etc/init.d/network restart");
 } else {
 	$proto=trim($_POST['wan_proto']);
