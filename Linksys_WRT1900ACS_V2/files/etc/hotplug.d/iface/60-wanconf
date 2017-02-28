@@ -1,0 +1,49 @@
+#!/usr/bin/ash
+# Script defines WAN parameters for VPNA and Router.
+# According to the network changes will be reconfigured WEB server, SSH
+# and privoxy.
+
+update_versions() {
+	part_info_file='/tmp/syscfg/part_info'
+        part_num=$(fw_printenv boot_part | cut -d"=" -f2)
+        sabai_version=$(uci get sabai.general.version)
+        version_build=$(cat /etc/sabai/sabaiopen_version)
+
+        if cat $part_info_file | grep boot_part$part_num ; then
+		sed -i -E "s/(boot_part$part_num.sabai_version=).*/\1$sabai_version/" $part_info_file
+		sed -i -E "s/(boot_part$part_num.version_build=).*/\1$version_build/" $part_info_file                                       
+        else
+		echo "boot_part$part_num.sabai_version=$sabai_version" >> $part_info_file
+		echo "boot_part$part_num.version_build=$version_build" >> $part_info_file
+        fi
+}
+
+[ wan = "$INTERFACE" ] && {
+	if ! ls /configs/factory 2>/dev/null ; then
+		update_versions
+
+		[ "$(uci get sabai.vpn.proto)" = "pptp" ] && exit 0
+		logger -t SABAI.WAN "Network data of $DEVICE will be updated."
+		[ "$(uci -p /var/state/ get network.wan.up)" = 1 ] && {
+			ip_wan="$(ifconfig -a eth0 | grep -F "inet addr" | awk '{print $2}' | tr -d 'addr:')"
+			gateway_wan="$( route -n | grep eth0 | grep "UG" | awk '{print $2}')"
+			mask_wan="$( route -n | grep eth0 | grep "UH" | awk '{print $3}')"
+
+			uci set network.wan.ipaddr=$ip_wan
+			uci set network.wan.gateway=$gateway_wan
+			uci set network.wan.netmask=$mask_wan
+			uci commit network
+
+			[ $(uci get sabai.wan.factory_mac) ] || /www/bin/wan.sh set_mac
+			uci set sabai.wan.ipaddr=$ip_wan
+			uci set sabai.wan.gateway=$gateway_wan
+			uci set sabai.wan.netmask=$mask_wan
+			uci commit sabai
+
+        	        cp "/etc/config/sabai" "/configs/factory"
+		}
+
+	fi
+
+	/etc/init.d/dropbear restart
+}
