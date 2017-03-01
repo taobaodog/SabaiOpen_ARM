@@ -4,6 +4,13 @@
 UCI_PATH=""
 TMP_FILE='/tmp/upgrade/tmp.txt'
 
+_save_config(){
+	if ! ls "/tmp/syscfg/backup" ; then
+		mkdir "/tmp/syscfg/backup"
+	fi
+
+	cp "/etc/config/sabai" "/tmp/syscfg/backup/sabai"
+}
 
 _check_update_done(){
 	status="$(fw_printenv | grep update_done | awk -F= '{print $2}')"
@@ -38,6 +45,8 @@ _upgrade(){
 	# Sysupgrade
 	fw_setenv update_done 1
 	fw_setenv revert_enabled 1
+        
+	_save_config
 
 	sysupgrade -n /tmp/upgrade/sabai-bundle.tar >> /var/log/messages
 }

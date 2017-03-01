@@ -35,7 +35,6 @@ switch ($act) {
 	default:
 		echo "ERROR";
 		break;
-	}
 }
 ?>
 
