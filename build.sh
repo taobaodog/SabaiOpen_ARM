@@ -16,6 +16,8 @@ _help(){
 
 
 _make() {
+	cd "$OPENWRT_DIR"
+
 	if [ -z "$SABAI_KEYS" ]; then
 		echo " \033[0;31m Please export SABAI_KEYS variable."
 		echo "Example: export SABAI_KEYS=/home/user/SabaiOpen/keys/"
@@ -28,7 +30,11 @@ _make() {
 	fi
 
 	cp -r "$SABAI_DIR"/www "$FILES_DIR"
-	cp -r "$SABAI_DIR/$PLATFORM_DIR"/etc "$FILES_DIR"
+	#cp -r "$SABAI_DIR/$PLATFORM_DIR"/files "."
+        for i in "$SABAI_DIR/$PLATFORM_DIR/files/*" ; do
+          cp -r $i "$FILES_DIR"
+        done
+
 	echo "$BUILD_VER" > "$FILES_DIR"/etc/sabai/sabaiopen_version
 
 	echo "SOA 2: \033[1;32m Build is starting. \033[0m"
@@ -41,12 +47,10 @@ _prepare(){
 	
 		cp -r "$PLATFORM_DIR"/patches/* "$PATCHES_DIR"
 	
-		cd "$OPENWRT_DIR"
 		git apply "$PATCHES_DIR/0001-SabaiOpen-build-support-linksys.patch"
 		echo "SOA 1: \033[0;32m Patches has been applied.\033[0m"
 	else
 		echo "SOA 1: \033[0;31m Patches has been already applied.\033[0m"
-		cd "$OPENWRT_DIR"
 	fi
 	_make
 	echo "SOA 3: \033[1;32m $PLATFORM_DIR Build is ready. \033[0m"
