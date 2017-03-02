@@ -4,7 +4,7 @@ BACKUP_DIR="/tmp/syscfg/backup"
 CONFIG_NAME="sabai"
 BACKED_CONFIG_FILE="$BACKUP_DIR/$CONFIG_NAME"
 
-if ! ls $BACKED_CONFIG ; then
+if [ -e ls $BACKED_CONFIG ] ; then
   exit 0 
 fi
 

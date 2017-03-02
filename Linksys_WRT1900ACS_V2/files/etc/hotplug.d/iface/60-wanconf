@@ -18,8 +18,20 @@ update_versions() {
         fi
 }
 
+save_factory_configs() {
+	local factory_dir="/configs/factory"
+
+	[ -e $factory_dir ] || mkdir $factory_dir
+	cp -fr /etc/config $factory_dir/
+	cp /configs/default $factory_dir/config/sabai
+	[ -e $factory_dir/sabai ] || mkdir $factory_dir/sabai
+	cp -fr /etc/sabai/openvpn $factory_dir/sabai
+	cp -fr /etc/passwd $factory_dir/
+	cp -fr /etc/shadow $factory_dir/
+}
+
 [ wan = "$INTERFACE" ] && {
-	if ! ls /configs/factory 2>/dev/null ; then
+	if [ ! -e /configs/factory ] ; then
 		update_versions
 
 		[ "$(uci get sabai.vpn.proto)" = "pptp" ] && exit 0
@@ -40,7 +52,8 @@ update_versions() {
 			uci set sabai.wan.netmask=$mask_wan
 			uci commit sabai
 
-        	        cp "/etc/config/sabai" "/configs/factory"
+                
+        	        save_factory_configs
 		}
 
 	fi
