@@ -17,6 +17,7 @@ _help(){
 
 _make() {
 	cd "$OPENWRT_DIR"
+	local mode=$1
 
 	if [ -z "$SABAI_KEYS" ]; then
 		echo " \033[0;31m Please export SABAI_KEYS variable."
@@ -38,7 +39,20 @@ _make() {
 	echo "$BUILD_VER" > "$FILES_DIR"/etc/sabai/sabaiopen_version
 
 	echo "SOA 2: \033[1;32m Build is starting. \033[0m"
-	make V=99
+	
+	local opts=''
+	case $mode in
+		'fast')
+			opts='-j8'		
+			;;
+		'normal')
+			opts='-j1'
+			;;
+		*)
+			;;
+	esac
+
+	make V=99 $opts
 }
 
 _prepare(){
@@ -59,7 +73,7 @@ _prepare(){
 case $1 in
 	"linksys")
 		PLATFORM_DIR="Linksys_WRT1900ACS_V2"
-		_prepare
+		_prepare $2
 		;;
 	"netgear")
 		PLATFORM_DIR="Netgear_WNDR3700_V4"
