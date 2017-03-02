@@ -5,7 +5,7 @@ UCI_PATH=""
 TMP_FILE='/tmp/upgrade/tmp.txt'
 
 _save_config(){
-	if [ -e "/tmp/syscfg/backup" ] ; then
+	if [ ! -e "/tmp/syscfg/backup" ] ; then
 		mkdir "/tmp/syscfg/backup"
 	fi
 
