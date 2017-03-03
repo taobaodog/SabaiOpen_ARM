@@ -1,4 +1,4 @@
-#!/usr/bin/ash
+#!/bin/sh
 # Script defines WAN parameters for VPNA and Router.
 # According to the network changes will be reconfigured WEB server, SSH
 # and privoxy.

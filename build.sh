@@ -8,10 +8,21 @@ PLATFORM_DIR=""
 BUILD_VER="$(date +"%m-%d-%y_%H-%M")"
 
 _help(){
-	echo "\n\033[1;32m Usage: sh build.sh <argument> \n"
-	echo " help       - To print help message"
+	echo "\033[1;32m"
+
+	echo " Usage: sh build.sh <platform> [<mode>] \n"
+	echo " help       - To print help message\n"
+
+	echo " platforms : "
 	echo " linksys    - To build Linksys_WRT1900ACS_V2"
-	echo " netgear    - To build Netgear_WNDR3700_V4 \n \033[0m"
+	echo " netgear    - To build Netgear_WNDR3700_V4\n"
+
+	echo " modes :"
+        echo " normal     - single-process compilation, used by default"
+	echo " fast       - 8 process compilation"
+	echo " max        - no limit for number of processes"
+
+	echo "\033[0m"
 }
 
 
@@ -42,6 +53,9 @@ _make() {
 	
 	local opts=''
 	case $mode in
+		'max')
+			opts='-j'
+			;;
 		'fast')
 			opts='-j8'		
 			;;
