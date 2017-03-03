@@ -26,7 +26,6 @@ config wifi-iface
 	option ssid 'SabaiOpen_2.4GHz'
 	option encryption 'psk2+aes'
 	option key 'sabaipass123'
-	option macaddr '62:38:e0:d7:6d:49'
 
 config wifi-iface
 	option device 'radio1'
@@ -46,7 +45,6 @@ config wifi-iface
 	option ssid 'SabaiOpen_5.8GHz'
 	option encryption 'psk2+aes'
 	option key 'sabaipass123'
-	option macaddr '62:38:e0:d7:6d:48'
 
 config wifi-iface
 	option device 'radio0'
@@ -56,5 +54,4 @@ config wifi-iface
 	option ssid 'SabaiWAN_5.8GHz'
 	option encryption 'psk2+aes'
 	option key 'sabaipass123'
-	option macaddr '62:38:e0:d7:6d:48'
 	
