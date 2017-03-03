@@ -16,18 +16,18 @@ else
 fi
 
 # parsing common configs of devices
-mode=$(uci get $config_file.wlradio$device.mode)
-ssid=$(uci get $config_file.wlradio$device.ssid)
-wpa_psk=$(uci get $config_file.wlradio$device.wpa_psk)
-encryption=$(uci get $config_file.wlradio$device.encryption)
-channel_freq=$(uci get $config_file.wlradio$device.channel_freq)
-frequency=$(uci get $config_file.wlradio$device.freq)
-width=$(uci get $config_file.wlradio$device.width)
+mode=$(uci get $config_file.wlan$device.mode)
+ssid=$(uci get $config_file.wlan$device.ssid)
+wpa_psk=$(uci get $config_file.wlan$device.wpa_psk)
+encryption=$(uci get $config_file.wlan$device.encryption)
+channel_freq=$(uci get $config_file.wlan$device.channel_freq)
+frequency=$(uci get $config_file.wlan$device.freq)
+width=$(uci get $config_file.wlan$device.width)
 
 # parsing specific configs of main wl
 if [ "$device" = "0" ]; then
-	uci set wireless.@wifi-iface["$device"].wpa_group_rekey=$(uci get $config_file.wlradio$device.wpa_group_rekey)
-	auto=$(uci get $config_file.wlradio$device.auto)
+	uci set wireless.@wifi-iface["$device"].wpa_group_rekey=$(uci get $config_file.wlan$device.wpa_group_rekey)
+	auto=$(uci get $config_file.wlan$device.auto)
 	if [ "$auto" = "off" ]; then
 		uci set wireless.radio0.channel="$channel_freq"
 		uci commit wireless
@@ -54,13 +54,13 @@ if [ "$mode" = "off" ]; then
 	uci set wireless.@wifi-iface["$device"].disabled=1
 else
 	uci set wireless.@wifi-iface["$device"].disabled=0
-	uci set wireless.@wifi-iface["$device"].mode="$(uci get $config_file.wlradio$device.mode)";
+	uci set wireless.@wifi-iface["$device"].mode="$(uci get $config_file.wlan$device.mode)";
 fi
 
 # Copy wlan configuration
-uci set wireless.@wifi-iface[$device].device="radio0"
-uci set wireless.@wifi-iface[$device].ssid="$(uci get $config_file.wlradio$device.ssid)"
-uci set wireless.@wifi-iface[$device].key="$(uci get $config_file.wlradio$device.wpa_psk)"
+#uci set wireless.@wifi-iface[$device].device="radio0"
+uci set wireless.@wifi-iface[$device].ssid="$(uci get $config_file.wlan$device.ssid)"
+uci set wireless.@wifi-iface[$device].key="$(uci get $config_file.wlan$device.wpa_psk)"
 
 # Setting specific configs for mainAP if device is VPNA
 if [ "$device" = "0" ] && [ "$action" = "acc" ]; then
@@ -77,7 +77,7 @@ fi
 uci commit wireless
 
 _wep(){
-	wepkeys="$(uci get $config_file.wlradio0.wepkeys)";
+	wepkeys="$(uci get $config_file.wlan0.wepkeys)";
 	uci set wireless.@wifi-iface[0].key1=$(echo $wepkeys |awk -F: '{print $0}' | awk '{print $1}')
 	uci set wireless.@wifi-iface[0].key2=$(echo $wepkeys |awk -F: '{print $0}' | awk '{print $2}')
 	uci set wireless.@wifi-iface[0].key3=$(echo $wepkeys |awk -F: '{print $0}' | awk '{print $3}')
@@ -87,10 +87,10 @@ _wep(){
 }
 
 _psk(){
-	wpa_encryption=$(uci get $config_file.wlradio0.wpa_encryption)
+	wpa_encryption=$(uci get $config_file.wlan0.wpa_encryption)
 	full_encryption=$(echo "$encryption+$wpa_encryption") 
 	uci set wireless.@wifi-iface[$device].encryption=$full_encryption
-	uci set wireless.@wifi-iface[$device].key=$(uci get $config_file.wlradio$device.wpa_psk)
+	uci set wireless.@wifi-iface[$device].key=$(uci get $config_file.wlan$device.wpa_psk)
 	uci set wireless.@wifi-iface[$device].key1=''
 	uci set wireless.@wifi-iface[$device].key2=''
 	uci set wireless.@wifi-iface[$device].key3=''

@@ -290,22 +290,22 @@ $.get('php/get_wl_channel.php');
 
 //TODO: remove wpa_type
 var wl0=$.parseJSON('{<?php
-          $mode=exec("uci get sabai.wlradio0.mode");
-          $ssid=trim(exec("uci get sabai.wlradio0.ssid"));
-          $encryption=trim(exec("uci get sabai.wlradio0.encryption"));
-          $wpa_type=trim(exec("uci get sabai.wlradio0.wpa_type"));
-          $wpa_encryption=trim(exec("uci get sabai.wlradio0.wpa_encryption"));
-          $wpa_psk=trim(exec("uci get sabai.wlradio0.wpa_psk"));
-          $wpa_rekey=trim(exec("uci get sabai.wlradio0.wpa_group_rekey"));
-          $channels_qty=trim(exec("uci get sabai.wlradio0.channels_qty"));      
-          $channel=trim(exec("uci get sabai.wlradio0.channel_freq"));
-          $auto=trim(exec("uci get sabai.wlradio0.auto"));
-          $width=trim(exec("uci get sabai.wlradio0.width"));
+          $mode=exec("uci get sabai.wlan0.mode");
+          $ssid=trim(exec("uci get sabai.wlan0.ssid"));
+          $encryption=trim(exec("uci get sabai.wlan0.encryption"));
+          $wpa_type=trim(exec("uci get sabai.wlan0.wpa_type"));
+          $wpa_encryption=trim(exec("uci get sabai.wlan0.wpa_encryption"));
+          $wpa_psk=trim(exec("uci get sabai.wlan0.wpa_psk"));
+          $wpa_rekey=trim(exec("uci get sabai.wlan0.wpa_group_rekey"));
+          $channels_qty=trim(exec("uci get sabai.wlan0.channels_qty"));      
+          $channel=trim(exec("uci get sabai.wlan0.channel_freq"));
+          $auto=trim(exec("uci get sabai.wlan0.auto"));
+          $width=trim(exec("uci get sabai.wlan0.width"));
           echo "\"mode\": \"$mode\",\"ssid\": \"$ssid\",\"encryption\": \"$encryption\",\"wpa_type\": \"$wpa_type\",\"wpa_encryption\": \"$wpa_encryption\",\"wpa_psk\": \"$wpa_psk\",\"wpa_rekey\": \"$wpa_rekey\", \"channel\": \"$channel\", \"auto\": \"$auto\", \"channels_qty\": \"$channels_qty\", \"width\": \"$width\"";
       ?>}');
 
 var wl0_wepkeyraw='<?php
-          $servers=exec("uci get sabai.wlradio0.wepkeys");
+          $servers=exec("uci get sabai.wlan0.wepkeys");
           echo "$servers"; 
           ?>';         
 var wl0_array = JSON.stringify(wl0_wepkeyraw.split(" "));
@@ -313,13 +313,13 @@ var wl0_wepkeyfin= "{\"keys\"" + ":" + wl0_array + "}";
 var wl0_wepkey = $.parseJSON(wl0_wepkeyfin);
 
 var wl1=$.parseJSON('{<?php
-  $mode=exec("uci get sabai.wlradio1.mode");
-  $ssid=trim(exec("uci get sabai.wlradio1.ssid"));
-  $encryption=trim(exec("uci get sabai.wlradio1.encryption"));
-  $wpa_encryption=trim(exec("uci get sabai.wlradio1.wpa_encryption"));
-  $wpa_psk=trim(exec("uci get sabai.wlradio1.wpa_psk"));
-  $channel=trim(exec("uci get sabai.wlradio1.channel_freq"));
-  $auto=trim(exec("uci get sabai.wlradio1.auto"));
+  $mode=exec("uci get sabai.wlan1.mode");
+  $ssid=trim(exec("uci get sabai.wlan1.ssid"));
+  $encryption=trim(exec("uci get sabai.wlan1.encryption"));
+  $wpa_encryption=trim(exec("uci get sabai.wlan1.wpa_encryption"));
+  $wpa_psk=trim(exec("uci get sabai.wlan1.wpa_psk"));
+  $channel=trim(exec("uci get sabai.wlan1.channel_freq"));
+  $auto=trim(exec("uci get sabai.wlan1.auto"));
   
   echo "\"mode\": \"$mode\",\"ssid\": \"$ssid\",\"encryption\": \"$encryption\",\"wpa_encryption\": \"$wpa_encryption\",\"wpa_psk\": \"$wpa_psk\",\"channel\": \"$channel\", \"auto\": \"$auto\"";?>}');
 

@@ -35,18 +35,18 @@ function setVar($prefix, $option){
 	$command="sh /www/bin/wl.sh save $option";
 
 	// Set the Sabai config to reflect latest settings
-	exec("uci $UCI_PATH set sabai.wlradio$option.mode=\"" . $mode . "\"");
-	exec("uci $UCI_PATH set sabai.wlradio$option.ssid=\"" . $ssid . "\"");
-	exec("uci $UCI_PATH set sabai.wlradio$option.encryption=\"" . $encryption . "\"");
-	exec("uci $UCI_PATH set sabai.wlradio$option.wpa_encryption=\"" . $wpa_encryption . "\"");
-	exec("uci $UCI_PATH set sabai.wlradio$option.wpa_psk=\"" . $wpa_psk . "\"");
+	exec("uci $UCI_PATH set sabai.wlan$option.mode=\"" . $mode . "\"");
+	exec("uci $UCI_PATH set sabai.wlan$option.ssid=\"" . $ssid . "\"");
+	exec("uci $UCI_PATH set sabai.wlan$option.encryption=\"" . $encryption . "\"");
+	exec("uci $UCI_PATH set sabai.wlan$option.wpa_encryption=\"" . $wpa_encryption . "\"");
+	exec("uci $UCI_PATH set sabai.wlan$option.wpa_psk=\"" . $wpa_psk . "\"");
 	if ($option == '0') {
-		exec("uci $UCI_PATH set sabai.wlradio$option.auto=\"" . $auto . "\"");
-		exec("uci $UCI_PATH set sabai.wlradio$option.channel_freq=\"" . $channel . "\"");
-		exec("uci $UCI_PATH set sabai.wlradio$option.wpa_group_rekey=\"" . $wpa_rekey . "\"");
-		exec("uci $UCI_PATH set sabai.wlradio$option.wepkeys=\"" . $wepkeys . "\"");
-		exec("uci $UCI_PATH set sabai.wlradio$option.freq=\"" . $freq . "\"");
-		exec("uci $UCI_PATH set sabai.wlradio$option.width=\"" . $width . "\"");
+		exec("uci $UCI_PATH set sabai.wlan$option.auto=\"" . $auto . "\"");
+		exec("uci $UCI_PATH set sabai.wlan$option.channel_freq=\"" . $channel . "\"");
+		exec("uci $UCI_PATH set sabai.wlan$option.wpa_group_rekey=\"" . $wpa_rekey . "\"");
+		exec("uci $UCI_PATH set sabai.wlan$option.wepkeys=\"" . $wepkeys . "\"");
+		exec("uci $UCI_PATH set sabai.wlan$option.freq=\"" . $freq . "\"");
+		exec("uci $UCI_PATH set sabai.wlan$option.width=\"" . $width . "\"");
 	};
 	exec("uci $UCI_PATH commit sabai");
 	exec("cp -r /etc/config/sabai /configs/");
