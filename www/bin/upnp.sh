@@ -33,7 +33,7 @@ if [ "$enable" = "on" ]; then
 	uci set upnpd.@perm_rule[0].int_ports=$intrange
 	uci set upnpd.@perm_rule[0].ext_ports=$extrange
 else
-	uci set upnpd.enable_upnp=0
+	uci set upnpd.config.enable_upnp=0
 fi
 
 if [ "$natpmp" = "on" ]; then

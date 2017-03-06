@@ -342,26 +342,25 @@ $('#wl1_wpa_type').val(wl1.wpa_type);
 $('#wl1_wpa_encryption').val(wl1.wpa_encryption); 
 $('#wl1_wpa_psk').val(wl1.wpa_psk);  
 
-function WLcall(wlForm){ 
-  hideUi("Adjusting Wireless settings..."); 
-$(document).ready( function(){
-// Pass the form values to the php file 
-$.post('php/wl.php', $(wlForm).serialize(), function(res){
-  // Detect if values have been passed back   
-    if(res!="" && wlForm =="#fe"){
-      WLresp(res);
-    }
-    else {
-      WLresp(res,wlForm);
-    }
-      showUi();
-});
- 
-// Refresh in case of bad data
-location.reload();
-
-}); 
-
+function WLcall(wlForm){
+  hideUi("Adjusting Wireless settings...");
+  $(document).ready(function() {
+    // Pass the form values to the php file
+    $.post('php/wl.php', $(wlForm).serialize(), function(res){})
+      .done(function(res) {
+        // Detect if values have been passed back
+        if(res!="" && wlForm =="#fe"){
+          WLresp(res);
+        }
+        else {
+          WLresp(res,wlForm);
+        }
+        showUi();
+      })
+      .always(function() {
+        location.reload();
+      });
+  });
 }
 
 function WLresp(res,wlForm){ 
