@@ -69,7 +69,7 @@ if (basename($_SERVER['PHP_SELF']) == basename(__FILE__)) {
 
       <div class="smallText">
         <br><b>Protocol</b> - Which protocol (tcp or udp) to forward. </li>
-        <br><b>VPN</b> - Forward ports through the normal internet connection (WAN) or through the tunnel (VPN), or both. Note that the Gateways feature may result in may result in undefined behavior when devices routed through an interface have ports forwarded through a different interface. Additionally, ports will only be forwarded through the VPN when the VPN service is active. </li>
+        <br><b>Gateway</b> - Forward ports through the normal internet connection (WAN) or through the tunnel (VPN), or both. Note that the Gateways feature in may result in undefined behavior when devices routed through an interface have ports forwarded through a different interface. Additionally, ports will only be forwarded through the VPN when the VPN service is active. </li>
         <br><b>Src. Address</b> - (optional) - Forward only if from this address. Ex: "25.25.25.25". </li>
         <br><b>Src. Ports</b> - The port(s) to be forwarded, as seen from the WAN. Ex: "2345", "6112:6120". </li>
         <br><b>Dest. Port</b> - The destination port(s) inside the LAN. Ex: "80", "27015:27060". </li>
